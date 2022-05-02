@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css">
+    <script src="https://kit.fontawesome.com/ece41fa2b3.js" crossorigin="anonymous"></script>
+    <title>Advanced To Do List</title>
+</head>
+
+<body>
+    <!--Tool box cont-->
+    <div class="toolbox-cont">
+        <div class="toolbox-priority-cont">
+            <div class="pink color"></div>
+            <div class="green color"></div>
+            <div class="blue color"></div>
+            <div class="black color"></div>
+        </div>
+        <div class="action-btn-cont">
+            <div class="add-btn">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="remove-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+        <div class="input-group rounded search">
+            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            <span class="input-group-text border-0" id="search-addon">
+              <i class="fas fa-search"></i>
+            </span>
+          </div>
+    </div>
+    <!--Ticket Box-->
+    <div class="main-cont">
+        <!-- <div class="ticket-cont">
+            <div class="ticket-color"></div>
+            <div class="ticket-id"></div>
+            <div class="task-area"></div>
+            <div class="ticket-lock">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+        </div> -->
+    </div>
+
+
+    <!--ModalContainer-->
+    <div class="modal-cont">
+        <textarea class="textarea-cont" placeholder="Enter Your Task" spellcheck="false"></textarea>
+        <div class="priority-colors-cont">
+            <div class="pink priority-color"></div>
+            <div class="green priority-color"></div>
+            <div class="blue priority-color"></div>
+            <div class="black priority-color"></div>
+        </div>
+
+    </div>
+</body>
+<script src="./index.js"></script>
+<script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script>
+</html>
