@@ -15,7 +15,17 @@ let colors = ["pink", "green", "blue", "black"];
 let defaultColor = colors[colors.length - 1];
 let taskData;
 let selectedColor;
-let ticketData=[];
+let ticketArr=[];
+
+// get all ticket from local Storage
+if(localStorage.getItem('tickets'))
+{
+  ticketArr=JSON.parse(localStorage.getItem('tickets'))
+  ticketArr.map(function(e)
+  {
+    createTicket(e.ticketColor,e.ticketData,e.ticketId);
+  })
+}
 
 
 // navbar color filter
@@ -26,17 +36,42 @@ navBarColor.forEach(function (colElem) {
     selectedColor = colElem.classList[0];
     //console.log(selectedColor);
 
-    let newTickets=ticketData.filter(function(e){
-      return selectedColor===ticketData.ticketColor;
+    let newTickets=ticketArr.filter(function(ticketObj){
+      return selectedColor===ticketObj.ticketColor;
     })
 
     // remove previous tickets
-    
+    let allTickets=document.querySelectorAll('.ticket-cont');
+    for(let i=0;i<allTickets.length;i++)
+    {
+      allTickets[i].remove();
+    }
 
+    newTickets.forEach(function(filterObj){
+      createTicket(filterObj.ticketColor,filterObj.ticketData,filterObj.ticketId);
+    })
 
 
   });
 });
+
+// take back all tickets
+
+navBarColor.forEach(function (colElem) {
+  colElem.addEventListener("dblclick", function (e) {
+    // remove
+    let allTickets=document.querySelectorAll('.ticket-cont');
+    for(let i=0;i<allTickets.length;i++)
+    {
+      allTickets[i].remove();
+    }
+
+    ticketArr.map(function(e){
+         createTicket(e.ticketColor,e.ticketData,e.ticketId)
+    })
+  });
+});
+
 
 // display pop up for enter task
 modal_Cont.style.display = "none";
@@ -64,7 +99,7 @@ colorPriority.forEach(function (colorElem) {
 // generating a ticket
 modal_Cont.addEventListener("keydown", function (e) {
   if (e.key === "Shift") {
-    createTicket(defaultColor, taskText.value,shortid());
+    createTicket(defaultColor, taskText.value);
     modal_Cont.style.display = "none";
     popUp = false;
     taskText.value = "";
@@ -73,9 +108,10 @@ modal_Cont.addEventListener("keydown", function (e) {
 
 function createTicket(ticketColor, taskData , ticketId) {
   let ticket = document.createElement("div");
+  let id=ticketId || shortid();
   ticket.setAttribute("class", "ticket-cont");
   ticket.innerHTML = `<div class="ticket-color ${ticketColor}"></div>
-                      <div class="ticket-id">#${ticketId}</div>
+                      <div class="ticket-id">#${id}</div>
                       <div class="task-area">${taskData}</div>
                       <div class="ticket-lock">
                       <i class="fa-solid fa-lock"></i>
@@ -85,7 +121,12 @@ function createTicket(ticketColor, taskData , ticketId) {
   handleRemove(ticket);
   handleLock(ticket);
   handleColor(ticket);
-  ticketData.push({ticketColor, taskData , ticketId});
+  if(!ticketId)
+  {
+    ticketArr.push({ticketColor, taskData , ticketId:id});
+    localStorage.setItem('tickets',JSON.stringify(ticketArr))
+  }
+  
 }
 // ticket id is use to make filter and storage easy
 
