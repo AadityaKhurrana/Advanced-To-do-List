@@ -11,7 +11,7 @@ let navBarColor = document.querySelectorAll(".color");
 let deleteFlag = false;
 let popUp = false;
 
-let colors = ["pink", "green", "blue", "black"];
+let colors = ["pink", "green", "blue", "yellow"];
 let defaultColor = colors[colors.length - 1];
 let taskData;
 let selectedColor;
